@@ -1,5 +1,5 @@
 // functions/api/register.ts
-import { json } from "../../src/lib/auth";
+import { json } from "../../lib/auth";
 
 export async function onRequestPost({ request, env }: any) {
   const body = await request.json().catch(() => null);
