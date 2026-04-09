@@ -9,7 +9,8 @@ export function Welcome() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: any) {
+    console.log("submit fired");
     e.preventDefault();
     setLoading(true);
     setMessage("");
@@ -85,7 +86,7 @@ export function Welcome() {
                 marginTop: 12,
                 padding: "10px 16px",
                 border: "1px solid black",
-                background: "white",
+                background: "blue",
                 cursor: "pointer",
                 pointerEvents: "auto",
                 position: "relative",
