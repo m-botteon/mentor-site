@@ -79,8 +79,20 @@ export function Welcome() {
           required
         />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create account"}
+        <button
+            type="submit"
+            style={{
+                marginTop: 12,
+                padding: "10px 16px",
+                border: "1px solid black",
+                background: "white",
+                cursor: "pointer",
+                pointerEvents: "auto",
+                position: "relative",
+                zIndex: 50,
+            }}
+            >
+            Register
         </button>
       </form>
 
