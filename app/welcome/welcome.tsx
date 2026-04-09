@@ -27,7 +27,13 @@ export default function RegisterPage() {
         }),
       });
 
-      const data = await res.json();
+      type ApiResponse = {
+        error?: string;
+        ok?: boolean;
+        userId?: string;
+      };
+
+      const data = (await res.json()) as ApiResponse;
 
       if (!res.ok) {
         setMessage(data.error || "Something went wrong");
