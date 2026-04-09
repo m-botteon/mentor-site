@@ -1,5 +1,9 @@
 import { json, requireSession, Env } from "../../lib/auth";
 
+type RegisterBody = {
+	displayName?: string;
+};
+
 type Ctx = {
   request: Request;
   env: Env;
@@ -22,7 +26,7 @@ export async function POST({ request, env }: Ctx) {
     return json({ error: "not logged in" }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => null);
+  const body = (await request.json()) as RegisterBody;
   const displayName =
     body?.displayName === undefined ? undefined : String(body.displayName).trim();
 

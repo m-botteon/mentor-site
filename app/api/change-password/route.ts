@@ -1,5 +1,10 @@
 import { hashPassword, json, requireSession, verifyPassword, Env } from "../../lib/auth";
 
+type RegisterBody = {
+	currentPassword?: string;
+    newPassword?: string;
+};
+
 type Ctx = {
   request: Request;
   env: Env;
@@ -12,7 +17,7 @@ export async function POST({ request, env }: Ctx) {
     return json({ error: "not logged in" }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => null);
+  const body = (await request.json()) as RegisterBody;
 
   if (!body?.currentPassword || !body?.newPassword) {
     return json(

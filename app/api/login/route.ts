@@ -6,13 +6,18 @@ import {
   Env,
 } from "../../lib/auth";
 
+type RegisterBody = {
+	email?: string;
+    password?: string;
+};
+
 type Ctx = {
   request: Request;
   env: Env;
 };
 
 export async function POST({ request, env }: Ctx) {
-  const body = await request.json().catch(() => null);
+  const body = (await request.json()) as RegisterBody;
 
   if (!body?.email || !body?.password) {
     return json({ error: "email and password are required" }, { status: 400 });

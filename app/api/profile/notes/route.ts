@@ -1,5 +1,9 @@
 import { json, requireSession, Env } from "../../../lib/auth";
 
+type RegisterBody = {
+	note?: string;
+};
+
 type Ctx = {
   request: Request;
   env: Env;
@@ -28,7 +32,7 @@ export async function POST({ request, env }: Ctx) {
     return json({ error: "not logged in" }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => null);
+  const body = (await request.json()) as RegisterBody;
 
   if (!body?.note) {
     return json({ error: "note is required" }, { status: 400 });

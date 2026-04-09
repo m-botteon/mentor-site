@@ -1,5 +1,10 @@
 import { json, requireRole, Env } from "../../../lib/auth";
 
+type RegisterBody = {
+	userID?: string;
+    role?: string;
+};
+
 type Ctx = {
   request: Request;
   env: Env;
@@ -26,10 +31,10 @@ export async function PATCH({ request, env }: Ctx) {
     return json({ error: "forbidden" }, { status: 403 });
   }
 
-  const body = await request.json().catch(() => null);
+  const body = (await request.json()) as RegisterBody;
 
-  if (!body?.userId || !body?.role) {
-    return json({ error: "userId and role required" }, { status: 400 });
+  if (!body?.userID || !body?.role) {
+    return json({ error: "userID and role required" }, { status: 400 });
   }
 
   const role = String(body.role);
@@ -41,7 +46,7 @@ export async function PATCH({ request, env }: Ctx) {
   await env.DB.prepare(
     "UPDATE users SET role = ? WHERE id = ?"
   )
-    .bind(role, String(body.userId))
+    .bind(role, String(body.userID))
     .run();
 
   return json({ ok: true });
