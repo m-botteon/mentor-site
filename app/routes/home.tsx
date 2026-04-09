@@ -25,7 +25,8 @@ export default function Home() {
 	const [displayName, setDisplayName] = useState("");
 	const [message, setMessage] = useState("");
 
-	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+	async function handleSubmit(e: any) {
+		console.log("submit fired");
 		e.preventDefault();
 
 		const res = await fetch("/api/register", {
@@ -81,7 +82,7 @@ export default function Home() {
 						marginTop: 12,
 						padding: "10px 16px",
 						border: "1px solid black",
-						background: "white",
+						background: "blue",
 						cursor: "pointer",
 						pointerEvents: "auto",
 						position: "relative",
